@@ -1,49 +1,107 @@
 <script setup>
-import DemoComponent from './components/DemoComponent.vue';
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
-import WelcomeItem from './components/WelcomeItem.vue';
+import DemoComponent from './components/DemoComponent.vue'
+import ChildComponent from './components/ChildComponent.vue'
+import FormComponent from './components/FormComponent.vue'
+import DetailComponent from './components/DetailComponent.vue'
+import LoginComponent from './components/LoginComponent.vue'
 </script>
 
 <template>
-    <header>
-        <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-        <div class="wrapper">
-            <HelloWorld msg="You did it!" />
-        </div>
-    </header>
-
-    <main>
-        <TheWelcome />
-    </main>
+    <RouterView />
 </template>
 
-<style scoped>
-header {
-    line-height: 1.5;
+<script>
+/**
+ * Vue.js code in here!
+ */
+// import Vue from 'vue'
+import axios from 'axios'
+import ChildComponent from './components/ChildComponent.vue'
+import LoginComponent from './components/LoginComponent.vue'
+// import component1 from 'component1'
+// import component2 from 'component2'
+
+export default {
+    /***********************************************************************************************************
+     ******************************* Pass data to child component **********************************************
+        **********************************************************************************************************/
+    // prop: [variable1, variable2],
+    // components: {component1, component2},
+    data() {
+        /***********************************************************************************************************
+         ******************************* Initialize global variables ***********************************************
+            **********************************************************************************************************/
+        return {
+            employeeNumberCurrent: null
+        }
+    },
+    created() {
+        /***********************************************************************************************************
+         *********************** Initialize data when this component is used. **************************************
+            **********************************************************************************************************/
+        console.log('Init created component and call to function get data from api server.');
+
+    },
+    mounted() {
+
+
+    },
+    watch: {
+
+    },
+    computed: {
+        appendMsg() {
+            return msg + "Process the value and assign the value to the corresponding variable the var has changed.";
+        }
+    },
+    methods: {
+        /**
+         * Example default function not using param
+         */
+        defaultFunction() {
+            this.msg = "Replace message here!";
+        },
+
+        /**
+         * Example default function using param
+         *
+         * @param int pageNum number of page
+         * @return boolean
+         */
+        defaultFunctionUsingParam(pageNum) {
+            console.log(pageNum);
+            return false;
+        },
+        handleDetailEmployee(employee) {
+            this.employeeNumberCurrent = employee;
+        },
+
+
+        /***********************************************************************************************************
+         ******* Async and await functions for manipulating server-side data through internal API protocols ********
+            **********************************************************************************************************/
+
+        /**
+         * Call API sample
+         */
+        async callAPI() {
+            try {
+                const callAPI = await axios.get('/apiendpoint', {
+                    /************ Attach param for request here ***************/
+                }).then(function (response) {
+                    console.log(response);
+                }).catch(function (errors) {
+                    console.log(errors);
+                });
+                console.log(callAPI.data);
+            } catch (err) {
+                console.log(err);
+            }
+        },
+    },
 }
+</script>
 
-.logo {
-    display: block;
-    margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-    header {
-        display: flex;
-        place-items: center;
-        padding-right: calc(var(--section-gap) / 2);
-    }
-
-    .logo {
-        margin: 0 2rem 0 0;
-    }
-
-    header .wrapper {
-        display: flex;
-        place-items: flex-start;
-        flex-wrap: wrap;
-    }
-}
-</style>
+<style scoped></style>
