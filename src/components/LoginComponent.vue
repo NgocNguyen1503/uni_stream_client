@@ -143,6 +143,11 @@ export default {
                 'access_token': googleUser.access_token
             }).then(function (response) {
                 console.log(response);
+                if (response.data.code == 200) {
+                    sessionStorage.setItem('access_token', response.data.data.accessToken);
+                    sessionStorage.setItem('user_infor', JSON.stringify(response.data.data.user_infor));
+                    window.location.replace('/home');
+                }
             }).catch(function (errors) {
                 console.log(errors);
             });
