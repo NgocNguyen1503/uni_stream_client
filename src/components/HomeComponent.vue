@@ -12,26 +12,27 @@
                 <div class="w-full bg-[#262626] flex flex-col items-center p-6">
                     <div class="flex flex-col gap-4 cursor-pointer group">
                         <div class="relative overflow-hidden rounded-xl">
-                            <img src="../assets/W-01/login3.jpg" alt="live"
+                            <img :src="live.my_live.thumbnail" alt="live"
                                 class="h-[500px] aspect-video object-cover group-hover:blur-sm transition-all duration-300 group-hover:brightness-75 group-hover:scale-105">
                             <div
                                 class="absolute inset-0 flex items-center justify-center text-6xl text-white transition-all duration-300 opacity-0 group-hover:opacity-100">
-                                <button class="hover:text-[#121212] transition-all duration-200">
+                                <button v-on:click="gotoDetail(live.my_live.id)" class=" hover:text-[#121212] transition-all
+                                    duration-200">
                                     <i class="fa-solid fa-play"></i>
                                 </button>
                             </div>
                         </div>
                         <div
-                            class="flex items-center justify-between transition-all duration-300 w-96 group-hover:opacity-75">
+                            class="flex items-center justify-between transition-all duration-300 group-hover:opacity-75">
                             <div class="flex items-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" alt="avatar" class="h-12 rounded-full">
+                                <img :src="live.my_live.avatar" alt="avatar" class="h-12 rounded-full">
                                 <div class="text-white">
-                                    <h1 class="text-lg font-medium">Hiếu Phạm</h1>
-                                    <p class="text-[#d1d5db]">Vẽ với tui</p>
+                                    <h1 class="text-lg font-medium">{{ live.my_live.streamer }}</h1>
+                                    <p class="text-[#d1d5db]">{{ live.my_live.title }}</p>
                                 </div>
                             </div>
                             <div class="flex items-center gap-3 text-white">
-                                <p>1:00:00</p>
+                                <p>{{ live.my_live.time_start }}</p>
                                 <p class="px-3 py-1 uppercase bg-red-500 animate-bounce">Live</p>
                             </div>
                         </div>
@@ -44,240 +45,19 @@
             <div class="flex flex-col gap-2">
                 <h1 class="text-xl font-medium text-white">Phiên live khác</h1>
                 <ul class="grid grid-cols-4 gap-6">
-                    <li class="flex flex-col gap-2 transition-all duration-200 cursor-pointer hover:brightness-75">
-                        <img src="../assets/W-03/list-stream-thumbnail.png" alt="live"
-                            class="object-cover w-full aspect-video">
+                    <li v-for="item in live.list_live" v-on:click="gotoDetail(item.id)"
+                        class="flex flex-col gap-2 transition-all duration-200 cursor-pointer hover:brightness-75">
+                        <img :src="item.thumbnail" alt="live" class="object-cover w-full aspect-video">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" alt="avatar" class="rounded-full h-9">
+                                <img :src="item.avatar" alt="avatar" class="rounded-full h-9">
                                 <div class="text-white">
-                                    <h1 class="text-base font-medium">Hiếu Phạm</h1>
-                                    <p class="text-[#d1d5db] text-sm">Vẽ với tui</p>
+                                    <h1 class="text-base font-medium">{{ item.streamer }}</h1>
+                                    <p class="text-[#d1d5db] text-sm" :title="item.title">{{ item.title }}</p>
                                 </div>
                             </div>
                             <div class="flex items-center gap-3 text-white">
-                                <p class="text-base">1:00:00</p>
-                                <p class="px-2 uppercase bg-red-500">Live</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col gap-2 transition-all duration-200 cursor-pointer hover:brightness-75">
-                        <img src="../assets/W-03/list-stream-thumbnail.png" alt="live"
-                            class="object-cover w-full aspect-video">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" alt="avatar" class="rounded-full h-9">
-                                <div class="text-white">
-                                    <h1 class="text-base font-medium">Hiếu Phạm</h1>
-                                    <p class="text-[#d1d5db] text-sm">Vẽ với tui</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3 text-white">
-                                <p class="text-base">1:00:00</p>
-                                <p class="px-2 uppercase bg-red-500">Live</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col gap-2 transition-all duration-200 cursor-pointer hover:brightness-75">
-                        <img src="../assets/W-03/list-stream-thumbnail.png" alt="live"
-                            class="object-cover w-full aspect-video">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" alt="avatar" class="rounded-full h-9">
-                                <div class="text-white">
-                                    <h1 class="text-base font-medium">Hiếu Phạm</h1>
-                                    <p class="text-[#d1d5db] text-sm">Vẽ với tui</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3 text-white">
-                                <p class="text-base">1:00:00</p>
-                                <p class="px-2 uppercase bg-red-500">Live</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col gap-2 transition-all duration-200 cursor-pointer hover:brightness-75">
-                        <img src="../assets/W-03/list-stream-thumbnail.png" alt="live"
-                            class="object-cover w-full aspect-video">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" alt="avatar" class="rounded-full h-9">
-                                <div class="text-white">
-                                    <h1 class="text-base font-medium">Hiếu Phạm</h1>
-                                    <p class="text-[#d1d5db] text-sm">Vẽ với tui</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3 text-white">
-                                <p class="text-base">1:00:00</p>
-                                <p class="px-2 uppercase bg-red-500">Live</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col gap-2 transition-all duration-200 cursor-pointer hover:brightness-75">
-                        <img src="../assets/W-03/list-stream-thumbnail.png" alt="live"
-                            class="object-cover w-full aspect-video">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" alt="avatar" class="rounded-full h-9">
-                                <div class="text-white">
-                                    <h1 class="text-base font-medium">Hiếu Phạm</h1>
-                                    <p class="text-[#d1d5db] text-sm">Vẽ với tui</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3 text-white">
-                                <p class="text-base">1:00:00</p>
-                                <p class="px-2 uppercase bg-red-500">Live</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col gap-2 transition-all duration-200 cursor-pointer hover:brightness-75">
-                        <img src="../assets/W-03/list-stream-thumbnail.png" alt="live"
-                            class="object-cover w-full aspect-video">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" alt="avatar" class="rounded-full h-9">
-                                <div class="text-white">
-                                    <h1 class="text-base font-medium">Hiếu Phạm</h1>
-                                    <p class="text-[#d1d5db] text-sm">Vẽ với tui</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3 text-white">
-                                <p class="text-base">1:00:00</p>
-                                <p class="px-2 uppercase bg-red-500">Live</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col gap-2 transition-all duration-200 cursor-pointer hover:brightness-75">
-                        <img src="../assets/W-03/list-stream-thumbnail.png" alt="live"
-                            class="object-cover w-full aspect-video">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" alt="avatar" class="rounded-full h-9">
-                                <div class="text-white">
-                                    <h1 class="text-base font-medium">Hiếu Phạm</h1>
-                                    <p class="text-[#d1d5db] text-sm">Vẽ với tui</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3 text-white">
-                                <p class="text-base">1:00:00</p>
-                                <p class="px-2 uppercase bg-red-500">Live</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col gap-2 transition-all duration-200 cursor-pointer hover:brightness-75">
-                        <img src="../assets/W-03/list-stream-thumbnail.png" alt="live"
-                            class="object-cover w-full aspect-video">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" alt="avatar" class="rounded-full h-9">
-                                <div class="text-white">
-                                    <h1 class="text-base font-medium">Hiếu Phạm</h1>
-                                    <p class="text-[#d1d5db] text-sm">Vẽ với tui</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3 text-white">
-                                <p class="text-base">1:00:00</p>
-                                <p class="px-2 uppercase bg-red-500">Live</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col gap-2 transition-all duration-200 cursor-pointer hover:brightness-75">
-                        <img src="../assets/W-03/list-stream-thumbnail.png" alt="live"
-                            class="object-cover w-full aspect-video">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" alt="avatar" class="rounded-full h-9">
-                                <div class="text-white">
-                                    <h1 class="text-base font-medium">Hiếu Phạm</h1>
-                                    <p class="text-[#d1d5db] text-sm">Vẽ với tui</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3 text-white">
-                                <p class="text-base">1:00:00</p>
-                                <p class="px-2 uppercase bg-red-500">Live</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col gap-2 transition-all duration-200 cursor-pointer hover:brightness-75">
-                        <img src="../assets/W-03/list-stream-thumbnail.png" alt="live"
-                            class="object-cover w-full aspect-video">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" alt="avatar" class="rounded-full h-9">
-                                <div class="text-white">
-                                    <h1 class="text-base font-medium">Hiếu Phạm</h1>
-                                    <p class="text-[#d1d5db] text-sm">Vẽ với tui</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3 text-white">
-                                <p class="text-base">1:00:00</p>
-                                <p class="px-2 uppercase bg-red-500">Live</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col gap-2 transition-all duration-200 cursor-pointer hover:brightness-75">
-                        <img src="../assets/W-03/list-stream-thumbnail.png" alt="live"
-                            class="object-cover w-full aspect-video">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" alt="avatar" class="rounded-full h-9">
-                                <div class="text-white">
-                                    <h1 class="text-base font-medium">Hiếu Phạm</h1>
-                                    <p class="text-[#d1d5db] text-sm">Vẽ với tui</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3 text-white">
-                                <p class="text-base">1:00:00</p>
-                                <p class="px-2 uppercase bg-red-500">Live</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col gap-2 transition-all duration-200 cursor-pointer hover:brightness-75">
-                        <img src="../assets/W-03/list-stream-thumbnail.png" alt="live"
-                            class="object-cover w-full aspect-video">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" alt="avatar" class="rounded-full h-9">
-                                <div class="text-white">
-                                    <h1 class="text-base font-medium">Hiếu Phạm</h1>
-                                    <p class="text-[#d1d5db] text-sm">Vẽ với tui</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3 text-white">
-                                <p class="text-base">1:00:00</p>
-                                <p class="px-2 uppercase bg-red-500">Live</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col gap-2 transition-all duration-200 cursor-pointer hover:brightness-75">
-                        <img src="../assets/W-03/list-stream-thumbnail.png" alt="live"
-                            class="object-cover w-full aspect-video">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" alt="avatar" class="rounded-full h-9">
-                                <div class="text-white">
-                                    <h1 class="text-base font-medium">Hiếu Phạm</h1>
-                                    <p class="text-[#d1d5db] text-sm">Vẽ với tui</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3 text-white">
-                                <p class="text-base">1:00:00</p>
-                                <p class="px-2 uppercase bg-red-500">Live</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col gap-2 transition-all duration-200 cursor-pointer hover:brightness-75">
-                        <img src="../assets/W-03/list-stream-thumbnail.png" alt="live"
-                            class="object-cover w-full aspect-video">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" alt="avatar" class="rounded-full h-9">
-                                <div class="text-white">
-                                    <h1 class="text-base font-medium">Hiếu Phạm</h1>
-                                    <p class="text-[#d1d5db] text-sm">Vẽ với tui</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3 text-white">
-                                <p class="text-base">1:00:00</p>
+                                <p class="text-base">{{ item.time_start }}</p>
                                 <p class="px-2 uppercase bg-red-500">Live</p>
                             </div>
                         </div>
@@ -313,7 +93,8 @@ export default {
          ******************************* Initialize global variables ***********************************************
             **********************************************************************************************************/
         return {
-
+            live: [],
+            access_token: sessionStorage.getItem('access_token')
         }
     },
     created() {
@@ -321,13 +102,13 @@ export default {
          *********************** Initialize data when this component is used. **************************************
             **********************************************************************************************************/
         console.log('Init created component and call to function get data from api server.');
+        this.getLive();
     },
     mounted() {
         /***********************************************************************************************************
          ******************** Once created, the interface is displayed and calls mounted. **************************
             **********************************************************************************************************/
         $(document).ready(function () {
-
         });
     },
     watch: {
@@ -387,6 +168,31 @@ export default {
                 console.log(err);
             }
         },
+
+        async getLive() {
+            try {
+                const callAPI = await axios.get('http://localhost:8000/api/index', {
+                    /************ Attach param for request here ***************/
+                    headers: {
+                        'Authorization': 'Bearer ' + this.access_token
+                    },
+                })
+                this.live = callAPI.data.data;
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
+        gotoDetail(id) {
+            window.location.href = '/detail/' + id;
+        }
     },
 }
 </script>
+
+<style>
+.w-32-truncate {
+    overflow: hidden;
+    text-decoration: none;
+}
+</style>
