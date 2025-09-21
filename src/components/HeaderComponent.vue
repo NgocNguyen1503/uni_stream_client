@@ -81,7 +81,8 @@
                                                     <label for="live_thumbnail"
                                                         class="text-white bg-[#222222] py-2 px-5 font-semibold rounded-xl hover:opacity-75 w-32 text-center cursor-pointer transition-all duration-200 text-lg">Chọn
                                                         ảnh</label>
-                                                    <input type="file" id="live_thumbnail" class="hidden">
+                                                    <input type="file" v-on:change="attachThumbnail($event)"
+                                                        id="live_thumbnail" class="hidden">
                                                 </div>
                                                 <div class="flex flex-col gap-4">
                                                     <div class="flex flex-col gap-2">
@@ -90,7 +91,7 @@
                                                             đề</label>
                                                         <input
                                                             class="px-5 py-4 bg-[#222222] rounded-xl transition-all duration-200 outline outline-2 outline-transparent focus:outline-white"
-                                                            type="text" id="modal_live_title"
+                                                            type="text" id="modal_live_title" v-model="title"
                                                             placeholder="Điền tiêu đề...">
                                                     </div>
                                                     <div class="flex flex-col gap-2">
@@ -100,19 +101,23 @@
                                                             gian</label>
                                                         <input
                                                             class="px-5 py-4 bg-[#222222] rounded-xl transition-all duration-200 outline outline-2 outline-transparent focus:outline-transparent"
-                                                            type="datetime-local" id="modal_live_date">
+                                                            type="datetime-local" id="modal_live_date"
+                                                            v-model="start_time">
                                                     </div>
                                                     <div class="flex justify-end w-full gap-4">
                                                         <label for="modal_live"
                                                             class="px-5 py-2 text-lg font-semibold text-center text-white transition-all duration-200 bg-red-500 cursor-pointer rounded-xl hover:opacity-75 min-w-24">Hủy</label>
-                                                        <label for="modal_live"
+                                                        <label for="modal_live" v-on:click="registerLive()"
                                                             class="text-white bg-[#222222] py-2 px-5 font-semibold rounded-xl hover:opacity-75 min-w-24 text-center cursor-pointer transition-all duration-200 text-lg">Xác
                                                             nhận</label>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <h1 class="w-full px-5 py-4 text-xl font-medium text-center text-red-500">
-                                                Vui lòng cập nhật lại token!</h1>
+                                            <h1 class="w-full px-5 py-4 text-xl text-center text-white">
+                                                <span v-on:click="callAuthGoogleLive()"
+                                                    class="text-red-500 font-medium cursor-pointer">Click vào
+                                                    đây</span> để cập nhật lại token!
+                                            </h1>
                                         </div>
                                     </div>
                                     <!-- End modal đăng kí phiên live -->
@@ -205,7 +210,10 @@ export default {
             access_token: sessionStorage.getItem('access_token'),
             offset: 0,
             limit: 15,
-            noti: []
+            noti: [],
+            thumbnail: '',
+            title: '',
+            start_time: '',
         }
     },
     created() {
@@ -298,6 +306,48 @@ export default {
                 }
             } catch (err) {
                 console.log(err);
+            }
+        },
+
+        async callAuthGoogleLive() {
+            try {
+                const callAPI = await axios.get('http://localhost:8000/api/google-live-auth-url', {
+                    /************ Attach param for request here ***************/
+                    headers: {
+                        'Authorization': 'Bearer ' + this.access_token
+                    },
+                });
+                if (callAPI.data.code == 200) {
+                    window.location.href = callAPI.data.data;
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
+        attachThumbnail(event) {
+            this.thumbnail = event.target.files[0]; // Lấy file người dùng chọn
+        },
+
+        // Function register live
+        async registerLive() {
+            if (!this.thumbnail) {
+                return alert("Chọn file trước đã!");
+            }
+            const formData = new FormData();
+            formData.append("thumbnail", this.thumbnail);
+            formData.append("title", this.title);
+            formData.append("start_time", this.start_time);
+            try {
+                const res = await axios.post("http://localhost:8000/api/youtube-register-live", formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': 'Bearer ' + this.access_token
+                    },
+                });
+                console.log("Đăng ký phiên live thành công");
+            } catch (err) {
+                console.error("Lỗi upload:", err);
             }
         },
     },

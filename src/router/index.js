@@ -1,7 +1,5 @@
 // src/router/index.js
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../components/HomeComponent.vue";
-import About from "../components/AboutComponent.vue";
 import LoginComponent from "@/components/LoginComponent.vue";
 import HomeComponent from "@/components/HomeComponent.vue";
 
@@ -22,8 +20,18 @@ const routes = [
         component: LoginComponent,
     },
     {
+        path: "/index",
+        name: "Index",
+        component: HomeComponent,
+    },
+    {
         path: "/home",
         name: "Home",
+        component: HomeComponent,
+    },
+    {
+        path: "/youtube-live-callback",
+        name: "HomeCallback",
         component: HomeComponent,
     },
 ];
