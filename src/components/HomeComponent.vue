@@ -149,10 +149,8 @@ export default {
             return false;
         },
 
-
-
         gotoDetail(id) {
-            window.location.href = '/detail/' + id;
+            window.location.href = '/detail?id=' + id;
         },
 
         getLiveCode() {

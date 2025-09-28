@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LoginComponent from "@/components/LoginComponent.vue";
 import HomeComponent from "@/components/HomeComponent.vue";
+import DetailComponent from "@/components/DetailComponent.vue";
 
 const routes = [
     // {
@@ -33,6 +34,11 @@ const routes = [
         path: "/youtube-live-callback",
         name: "HomeCallback",
         component: HomeComponent,
+    },
+    {
+        path: "/detail",
+        name: "Detail",
+        component: DetailComponent,
     },
 ];
 
