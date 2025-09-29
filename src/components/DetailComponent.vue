@@ -11,203 +11,23 @@
                 <p class="p-5 text-xl font-medium text-center text-white">Khám phá thêm</p>
                 <ul id="list-stream-video"
                     class="pl-3 pr-2 mr-1 flex flex-col gap-3 scrollbar-thumb-[#3e3e3e] scrollbar-track-transparent scrollbar overflow-y-scroll h-[90%]">
-                    <li class="flex flex-col cursor-pointer">
-                        <img src="../assets/W-03/list-stream-thumbnail.png"
+                    <li v-for="otherLive in live.list_live" class="flex flex-col cursor-pointer">
+                        <img :src="otherLive.thumbnail" onerror="../assets/W-03/list-stream-thumbnail.png"
                             class="flex object-cover overflow-hidden transition-all duration-200 opacity-100 rounded-xl hover:opacity-60 aspect-video"
                             alt="">
                         <div class="flex mt-4 h-[15%] items-center">
                             <img src="../assets/W-02/avatar.jpg" class="rounded-full size-10" alt="">
                             <div class="flex flex-col justify-center flex-grow ml-2 text-white">
                                 <div class="flex items-center justify-between w-full text-base font-medium">
-                                    <p>feyd153</p>
+                                    <p>{{ otherLive.streamer_name }}</p>
                                     <div class="flex items-center gap-1 space-x-1">
-                                        <p class="text-sm">0:37:29</p>
+                                        <p class="text-sm">{{ otherLive.time_start }}</p>
                                         <div class="flex px-2 bg-red-500">
                                             <p>LIVE</p>
                                         </div>
                                     </div>
                                 </div>
-                                <p class="mt-1 text-sm">Vẽ cùng tuiii</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col cursor-pointer">
-                        <img src="../assets/W-03/list-stream-thumbnail.png"
-                            class="flex object-cover overflow-hidden transition-all duration-200 opacity-100 rounded-xl hover:opacity-60 aspect-video"
-                            alt="">
-                        <div class="flex mt-4 h-[15%] items-center">
-                            <img src="../assets/W-02/avatar.jpg" class="rounded-full size-10" alt="">
-                            <div class="flex flex-col justify-center flex-grow ml-2 text-white">
-                                <div class="flex items-center justify-between w-full text-base font-medium">
-                                    <p>feyd153</p>
-                                    <div class="flex items-center gap-1 space-x-1">
-                                        <p class="text-sm">0:37:29</p>
-                                        <div class="flex px-2 bg-red-500">
-                                            <p>LIVE</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="mt-1 text-sm">Vẽ cùng tuiii</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col cursor-pointer">
-                        <img src="../assets/W-03/list-stream-thumbnail.png"
-                            class="flex object-cover overflow-hidden transition-all duration-200 opacity-100 rounded-xl hover:opacity-60 aspect-video"
-                            alt="">
-                        <div class="flex mt-4 h-[15%] items-center">
-                            <img src="../assets/W-02/avatar.jpg" class="rounded-full size-10" alt="">
-                            <div class="flex flex-col justify-center flex-grow ml-2 text-white">
-                                <div class="flex items-center justify-between w-full text-base font-medium">
-                                    <p>feyd153</p>
-                                    <div class="flex items-center gap-1 space-x-1">
-                                        <p class="text-sm">0:37:29</p>
-                                        <div class="flex px-2 bg-red-500">
-                                            <p>LIVE</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="mt-1 text-sm">Vẽ cùng tuiii</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col cursor-pointer">
-                        <img src="../assets/W-03/list-stream-thumbnail.png"
-                            class="flex object-cover overflow-hidden transition-all duration-200 opacity-100 rounded-xl hover:opacity-60 aspect-video"
-                            alt="">
-                        <div class="flex mt-4 h-[15%] items-center">
-                            <img src="../assets/W-02/avatar.jpg" class="rounded-full size-10" alt="">
-                            <div class="flex flex-col justify-center flex-grow ml-2 text-white">
-                                <div class="flex items-center justify-between w-full text-base font-medium">
-                                    <p>feyd153</p>
-                                    <div class="flex items-center gap-1 space-x-1">
-                                        <p class="text-sm">0:37:29</p>
-                                        <div class="flex px-2 bg-red-500">
-                                            <p>LIVE</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="mt-1 text-sm">Vẽ cùng tuiii</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col cursor-pointer">
-                        <img src="../assets/W-03/list-stream-thumbnail.png"
-                            class="flex object-cover overflow-hidden transition-all duration-200 opacity-100 rounded-xl hover:opacity-60 aspect-video"
-                            alt="">
-                        <div class="flex mt-4 h-[15%] items-center">
-                            <img src="../assets/W-02/avatar.jpg" class="rounded-full size-10" alt="">
-                            <div class="flex flex-col justify-center flex-grow ml-2 text-white">
-                                <div class="flex items-center justify-between w-full text-base font-medium">
-                                    <p>feyd153</p>
-                                    <div class="flex items-center gap-1 space-x-1">
-                                        <p class="text-sm">0:37:29</p>
-                                        <div class="flex px-2 bg-red-500">
-                                            <p>LIVE</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="mt-1 text-sm">Vẽ cùng tuiii</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col cursor-pointer">
-                        <img src="../assets/W-03/list-stream-thumbnail.png"
-                            class="flex object-cover overflow-hidden transition-all duration-200 opacity-100 rounded-xl hover:opacity-60 aspect-video"
-                            alt="">
-                        <div class="flex mt-4 h-[15%] items-center">
-                            <img src="../assets/W-02/avatar.jpg" class="rounded-full size-10" alt="">
-                            <div class="flex flex-col justify-center flex-grow ml-2 text-white">
-                                <div class="flex items-center justify-between w-full text-base font-medium">
-                                    <p>feyd153</p>
-                                    <div class="flex items-center gap-1 space-x-1">
-                                        <p class="text-sm">0:37:29</p>
-                                        <div class="flex px-2 bg-red-500">
-                                            <p>LIVE</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="mt-1 text-sm">Vẽ cùng tuiii</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col cursor-pointer">
-                        <img src="../assets/W-03/list-stream-thumbnail.png"
-                            class="flex object-cover overflow-hidden transition-all duration-200 opacity-100 rounded-xl hover:opacity-60 aspect-video"
-                            alt="">
-                        <div class="flex mt-4 h-[15%] items-center">
-                            <img src="../assets/W-02/avatar.jpg" class="rounded-full size-10" alt="">
-                            <div class="flex flex-col justify-center flex-grow ml-2 text-white">
-                                <div class="flex items-center justify-between w-full text-base font-medium">
-                                    <p>feyd153</p>
-                                    <div class="flex items-center gap-1 space-x-1">
-                                        <p class="text-sm">0:37:29</p>
-                                        <div class="flex px-2 bg-red-500">
-                                            <p>LIVE</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="mt-1 text-sm">Vẽ cùng tuiii</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col cursor-pointer">
-                        <img src="../assets/W-03/list-stream-thumbnail.png"
-                            class="flex object-cover overflow-hidden transition-all duration-200 opacity-100 rounded-xl hover:opacity-60 aspect-video"
-                            alt="">
-                        <div class="flex mt-4 h-[15%] items-center">
-                            <img src="../assets/W-02/avatar.jpg" class="rounded-full size-10" alt="">
-                            <div class="flex flex-col justify-center flex-grow ml-2 text-white">
-                                <div class="flex items-center justify-between w-full text-base font-medium">
-                                    <p>feyd153</p>
-                                    <div class="flex items-center gap-1 space-x-1">
-                                        <p class="text-sm">0:37:29</p>
-                                        <div class="flex px-2 bg-red-500">
-                                            <p>LIVE</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="mt-1 text-sm">Vẽ cùng tuiii</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col cursor-pointer">
-                        <img src="../assets/W-03/list-stream-thumbnail.png"
-                            class="flex object-cover overflow-hidden transition-all duration-200 opacity-100 rounded-xl hover:opacity-60 aspect-video"
-                            alt="">
-                        <div class="flex mt-4 h-[15%] items-center">
-                            <img src="../assets/W-02/avatar.jpg" class="rounded-full size-10" alt="">
-                            <div class="flex flex-col justify-center flex-grow ml-2 text-white">
-                                <div class="flex items-center justify-between w-full text-base font-medium">
-                                    <p>feyd153</p>
-                                    <div class="flex items-center gap-1 space-x-1">
-                                        <p class="text-sm">0:37:29</p>
-                                        <div class="flex px-2 bg-red-500">
-                                            <p>LIVE</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="mt-1 text-sm">Vẽ cùng tuiii</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="flex flex-col cursor-pointer">
-                        <img src="../assets/W-03/list-stream-thumbnail.png"
-                            class="flex object-cover overflow-hidden transition-all duration-200 opacity-100 rounded-xl hover:opacity-60 aspect-video"
-                            alt="">
-                        <div class="flex mt-4 h-[15%] items-center">
-                            <img src="../assets/W-02/avatar.jpg" class="rounded-full size-10" alt="">
-                            <div class="flex flex-col justify-center flex-grow ml-2 text-white">
-                                <div class="flex items-center justify-between w-full text-base font-medium">
-                                    <p>feyd153</p>
-                                    <div class="flex items-center gap-1 space-x-1">
-                                        <p class="text-sm">0:37:29</p>
-                                        <div class="flex px-2 bg-red-500">
-                                            <p>LIVE</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="mt-1 text-sm">Vẽ cùng tuiii</p>
+                                <p class="mt-1 text-sm">{{ otherLive.title }}</p>
                             </div>
                         </div>
                     </li>
@@ -219,18 +39,26 @@
             <div class="flex flex-col flex-grow mt-16 bg-black">
                 <div class="flex flex-row justify-between flex-grow h-[10%] mx-6 items-center content-center">
                     <div id="author-infor" class="flex items-center gap-4">
-                        <img src="../assets/W-02/avatar.jpg" class="rounded-full size-12" alt="">
+                        <img :src="live.live.avatar" onerror="../assets/W-02/avatar.jpg" class="rounded-full size-12"
+                            alt="">
                         <div class="flex flex-col justify-center flex-grow text-white">
                             <div id="author-name"
                                 class="flex items-center justify-between w-full text-base font-medium">
-                                <p>feyd153</p>
+                                <p>{{ live.live.streamer_name }}</p>
                             </div>
-                            <p id="stream-caption" class="mt-1 text-sm">Vẽ cùng tuiii</p>
+                            <p id="stream-caption" class="mt-1 text-sm">{{ live.live.title }}</p>
                         </div>
                         <!-- Start chưa follow -->
-                        <button id="follow-btn"
+                        <button v-if="live.live.follow == 0" id="follow-btn"
                             class="h-10 px-5 text-white transition-all duration-200 bg-red-700 rounded-md hover:opacity-75">
                             <i class="fa-solid fa-plus"></i> Follow
+                        </button>
+                        <button v-if="live.live.follow == 1" id="follow-btn"
+                            class="h-10 px-5 text-white transition-all duration-200 bg-red-700 rounded-md hover:opacity-75">
+                            <i class="fa-regular fa-circle-check"></i> Unfollow
+                        </button>
+                        <button v-if="live.live.follow == 2" id="follow-btn"
+                            class="h-10 px-5 text-white transition-all duration-200 bg-red-700 rounded-md hover:opacity-75">
                         </button>
                         <!-- End chưa follow -->
 
@@ -310,19 +138,19 @@
                                             <label for="modal-stream-infor"
                                                 class="ml-2 text-xl font-medium text-white">watch_url</label>
                                             <p class="text-base px-5 py-4 bg-[#222222] rounded-xl text-gray-300"
-                                                type="text" id="modal-stream-infor">watch_url</p>
+                                                type="text" id="modal-stream-infor">{{ live.live.watch_url }}</p>
                                         </div>
                                         <div class="flex flex-col gap-2">
                                             <label for="modal-stream-infor"
                                                 class="ml-2 text-xl font-medium text-white">stream_url</label>
                                             <p class="text-base px-5 py-4 bg-[#222222] rounded-xl text-gray-300"
-                                                type="text" id="modal-stream-infor">stream_url</p>
+                                                type="text" id="modal-stream-infor">{{ live.live.stream_url }}</p>
                                         </div>
                                         <div class="flex flex-col gap-2">
                                             <label for="modal-stream-infor"
                                                 class="ml-2 text-xl font-medium text-white">stream_key</label>
                                             <p class="text-base px-5 py-4 bg-[#222222] rounded-xl text-gray-300"
-                                                type="text" id="modal-stream-infor">stream_key</p>
+                                                type="text" id="modal-stream-infor">{{ live.live.stream_key }}</p>
                                         </div>
                                     </div>
                                     <!-- End phiên live của tôi -->
@@ -344,8 +172,7 @@
                     </div>
                 </div>
 
-                <iframe id="stream-frame" class="h-[90%] mb-5 mx-1 rounded-sm"
-                    src="https://www.youtube.com/watch?v=gxW-eskb1Eo"></iframe>
+                <iframe id="stream-frame" class="h-[90%] mb-5 mx-1 rounded-sm" :src="live.live.embed_url"></iframe>
             </div>
             <!-- End streaming frame -->
 
@@ -483,6 +310,7 @@ export default {
         return {
             liveId: 0,
             access_token: sessionStorage.getItem('access_token'),
+            live: [],
         }
     },
     created() {
