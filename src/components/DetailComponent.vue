@@ -49,15 +49,15 @@
                             <p id="stream-caption" class="mt-1 text-sm">{{ live.live.title }}</p>
                         </div>
                         <!-- Start chưa follow -->
-                        <button v-if="live.live.follow == 0" id="follow-btn"
+                        <button v-if="live.live.follows == 0" id="follow-btn" v-on:click="actionFollow('follow')"
                             class="h-10 px-5 text-white transition-all duration-200 bg-red-700 rounded-md hover:opacity-75">
                             <i class="fa-solid fa-plus"></i> Follow
                         </button>
-                        <button v-if="live.live.follow == 1" id="follow-btn"
+                        <button v-if="live.live.follows == 1" id="unfollow-btn" v-on:click="actionFollow('unfollow')"
                             class="h-10 px-5 text-white transition-all duration-200 bg-red-700 rounded-md hover:opacity-75">
                             <i class="fa-regular fa-circle-check"></i> Unfollow
                         </button>
-                        <button v-if="live.live.follow == 2" id="follow-btn"
+                        <button v-if="live.live.follows == 2" disabled id="follow-btn"
                             class="h-10 px-5 text-white transition-all duration-200 bg-red-700 rounded-md hover:opacity-75">
                         </button>
                         <!-- End chưa follow -->
@@ -184,85 +184,12 @@
                 <div id="list-comment"
                     class="flex flex-col h-[80%] overflow-y-scroll scrollbar-thumb-[#3e3e3e] scrollbar-track-transparent scrollbar">
                     <ul class="flex flex-col gap-3">
-                        <li class="flex flex-col mx-4">
+                        <li v-for="comment in comments" class="flex flex-col mx-4">
                             <div class="flex flex-row content-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" class="rounded-full size-6" alt="">
-                                <p class="text-base font-medium text-gray-200">Nguyengoc</p>
+                                <img :src="comment.avatar" class="rounded-full size-6" :title="comment.name" alt="">
+                                <p class="text-base font-bold text-gray-200">{{ comment.name }}</p>
                             </div>
-                            <p class="ml-8 text-base text-white">hay quá ae tin tôi</p>
-                        </li>
-                        <li class="flex flex-col mx-4">
-                            <div class="flex flex-row content-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" class="rounded-full size-6" alt="">
-                                <p class="text-base font-medium text-gray-200">Nguyengoc</p>
-                            </div>
-                            <p class="ml-8 text-base text-white">Combo 2 chiếc quần short kaki giá chỉ 115k,nhanh tay
-                                thì
-                                còn chậm tay là hết cả nhà ơi</p>
-                        </li>
-                        <li class="flex flex-col mx-4">
-                            <div class="flex flex-row content-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" class="rounded-full size-6" alt="">
-                                <p class="text-base font-medium text-gray-200">Nguyengoc</p>
-                            </div>
-                            <p class="ml-8 text-base text-white">hay quá ae tin tôi</p>
-                        </li>
-                        <li class="flex flex-col mx-4">
-                            <div class="flex flex-row content-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" class="rounded-full size-6" alt="">
-                                <p class="text-base font-medium text-gray-200">Nguyengoc</p>
-                            </div>
-                            <p class="ml-8 text-base text-white">Combo 2 chiếc quần short kaki giá chỉ 115k,nhanh tay
-                                thì
-                                còn chậm tay là hết cả nhà ơi</p>
-                        </li>
-                        <li class="flex flex-col mx-4">
-                            <div class="flex flex-row content-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" class="rounded-full size-6" alt="">
-                                <p class="text-base font-medium text-gray-200">Nguyengoc</p>
-                            </div>
-                            <p class="ml-8 text-base text-white">hay quá ae tin tôi</p>
-                        </li>
-                        <li class="flex flex-col mx-4">
-                            <div class="flex flex-row content-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" class="rounded-full size-6" alt="">
-                                <p class="text-base font-medium text-gray-200">Nguyengoc</p>
-                            </div>
-                            <p class="ml-8 text-base text-white">Combo 2 chiếc quần short kaki giá chỉ 115k,nhanh tay
-                                thì
-                                còn chậm tay là hết cả nhà ơi</p>
-                        </li>
-                        <li class="flex flex-col mx-4">
-                            <div class="flex flex-row content-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" class="rounded-full size-6" alt="">
-                                <p class="text-base font-medium text-gray-200">Nguyengoc</p>
-                            </div>
-                            <p class="ml-8 text-base text-white">hay quá ae tin tôi</p>
-                        </li>
-                        <li class="flex flex-col mx-4">
-                            <div class="flex flex-row content-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" class="rounded-full size-6" alt="">
-                                <p class="text-base font-medium text-gray-200">Nguyengoc</p>
-                            </div>
-                            <p class="ml-8 text-base text-white">Combo 2 chiếc quần short kaki giá chỉ 115k,nhanh tay
-                                thì
-                                còn chậm tay là hết cả nhà ơi</p>
-                        </li>
-                        <li class="flex flex-col mx-4">
-                            <div class="flex flex-row content-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" class="rounded-full size-6" alt="">
-                                <p class="text-base font-medium text-gray-200">Nguyengoc</p>
-                            </div>
-                            <p class="ml-8 text-base text-white">hay quá ae tin tôi</p>
-                        </li>
-                        <li class="flex flex-col mx-4">
-                            <div class="flex flex-row content-center gap-2">
-                                <img src="../assets/W-02/avatar.jpg" class="rounded-full size-6" alt="">
-                                <p class="text-base font-medium text-gray-200">Nguyengoc</p>
-                            </div>
-                            <p class="ml-8 text-base text-white">Combo 2 chiếc quần short kaki giá chỉ 115k,nhanh tay
-                                thì
-                                còn chậm tay là hết cả nhà ơi</p>
+                            <p class="ml-8 text-base text-white">{{ comment.comment }}</p>
                         </li>
                     </ul>
                 </div>
@@ -271,11 +198,12 @@
                         <i class="fa-solid fa-arrow-right-to-bracket"></i> FeyD153 đã tham gia
                     </p>
                     <div class="flex flex-row items-center gap-3">
-                        <input id="comment-box" type="text"
+                        <input id="comment-box" type="text" v-model="txt_comment"
                             class="px-3 py-3 w-full pl-4 bg-[#444444] rounded-xl transition-all  outline outline-2 outline-transparent focus:outline-white scrollbar-none text-white placeholder:text-gray-400 resize-none"
                             placeholder="Hãy nói gì đó">
                         <div class="flex content-center text-xl text-white cursor-pointer size-5 hover:opacity-75">
-                            <i class="fa-solid fa-paper-plane"></i>
+                            <i v-if="txt_comment !== ''" v-on:click="sendComment()" class="fa-solid fa-paper-plane"></i>
+                            <i v-else class="fa-solid fa-paper-plane"></i>
                         </div>
                     </div>
                 </div>
@@ -311,6 +239,8 @@ export default {
             liveId: 0,
             access_token: sessionStorage.getItem('access_token'),
             live: [],
+            txt_comment: "",
+            comments: [],
         }
     },
     created() {
@@ -320,6 +250,8 @@ export default {
 
         this.getLiveIdFromURL();
         this.getLiveDetail();
+        this.getComments();
+        this.joinCommentRoom();
     },
     mounted() {
         // this.intervalId = setInterval(() => {
@@ -335,12 +267,64 @@ export default {
             return msg + "Process the value and assign the value to the corresponding variable the var has changed.";
         }
     },
+    /**
+     * Define global service socket
+     *
+     * Listing event from socket.io server
+     * "ServerSendCommentToClient" is the name of the channel that sends notifications to all clients installed in the server socket
+     */
+    sockets: {
+        // Send data to server
+        ClientSendCommentToServer: function (responseComment) {
+            this.comment = responseComment;
+        },
+        // Listen event from server and render data again
+        ServerSendCommentToClient: function (responseComment) {
+            // Push to the comment list
+            if (responseComment.type === 'comment' &&
+                this.liveId == responseComment.live_id) {
+                // Append comment to list, reupdate data
+                this.comments.push(responseComment);
+                this.$forceUpdate();
+            }
+        },
+    },
+
     methods: {
         /**
          * Example default function not using param
          */
         defaultFunction() {
             this.msg = "Replace message here!";
+        },
+
+        // Leave comment room
+        leaveCommentRoom() {
+            this.$socket.emit('ClientSendCommentToServer', {
+                id: 1,
+                comment: "",
+                avatar: "",
+                name: "",
+                created_at: "2022-07 -09 07:00: 41",
+                updated_at: "2022-07 -09 07:00: 41",
+                live_id: this.liveId,
+                type: "comment",
+                action: "join"
+            });
+        },
+        // Join a comment room
+        joinCommentRoom() {
+            this.$socket.emit('ClientSendCommentToServer', {
+                id: 1,
+                comment: "",
+                avatar: "",
+                name: "",
+                created_at: "2022-07 -09 07:00: 41",
+                updated_at: "2022-07 -09 07:00: 41",
+                live_id: this.liveId,
+                type: "comment",
+                action: "join"
+            });
         },
 
         getLiveIdFromURL() {
@@ -377,6 +361,65 @@ export default {
                     }
                 })
                 this.live = callAPI.data.data;
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
+        async actionFollow(type) {
+            try {
+                const callAPI = await axios.get('http://localhost:8000/api/follow', {
+                    /************ Attach param for request here ***************/
+                    headers: {
+                        'Authorization': 'Bearer ' + this.access_token
+                    },
+                    params: {
+                        'live_id': this.liveId,
+                        'follow_id': this.live.live.streamer_id,
+                        'type': type
+                    }
+                })
+                if (type == 'follow') {
+                    this.live.live.follows = 1;
+                } else {
+                    this.live.live.follows = 0;
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
+        async sendComment() {
+            try {
+                const formData = new FormData();
+                formData.append("live_id", this.liveId);
+                formData.append("comment", this.txt_comment);
+                const callAPI = await axios.post('http://localhost:8000/api/send-comment', formData, {
+                    /************ Attach param for request here ***************/
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        'Authorization': 'Bearer ' + this.access_token
+                    },
+                });
+                this.comments.push(callAPI.data.data);
+                this.txt_comment = '';
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
+        async getComments() {
+            try {
+                const callAPI = await axios.get('http://localhost:8000/api/get-comments', {
+                    /************ Attach param for request here ***************/
+                    headers: {
+                        'Authorization': 'Bearer ' + this.access_token
+                    },
+                    params: {
+                        'live_id': this.liveId
+                    }
+                });
+                this.comments = callAPI.data.data;
             } catch (err) {
                 console.log(err);
             }
