@@ -39,7 +39,7 @@
             <div class="flex flex-col flex-grow mt-16 bg-black">
                 <div class="flex flex-row justify-between flex-grow h-[10%] mx-6 items-center content-center">
                     <div id="author-infor" class="flex items-center gap-4">
-                        <img :src="live.live.avatar" onerror="../assets/W-02/avatar.jpg" class="rounded-full size-12"
+                        <img :src="live.live.avatar" onerror="'../assets/W-02/avatar.jpg'" class="rounded-full size-12"
                             alt="">
                         <div class="flex flex-col justify-center flex-grow text-white">
                             <div id="author-name"
@@ -194,12 +194,12 @@
                     </ul>
                 </div>
                 <div class="flex flex-col h-[10%] px-5 py-2 gap-2 border-t-2 border-t-gray-500 border-opacity-50">
-                    <p class="text-white">
-                        <i class="fa-solid fa-arrow-right-to-bracket"></i> FeyD153 đã tham gia
+                    <p v-if="userJustJoin !== ''" class="text-white">
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i> {{ userJustJoin }} đã tham gia
                     </p>
                     <div class="flex flex-row items-center gap-3">
                         <input id="comment-box" type="text" v-model="txt_comment"
-                            class="px-3 py-3 w-full pl-4 bg-[#444444] rounded-xl transition-all  outline outline-2 outline-transparent focus:outline-white scrollbar-none text-white placeholder:text-gray-400 resize-none"
+                            class="px-3 py-3 w-full pl-4 bg-[#444444] rounded-xl transition-all outline outline-2 outline-transparent focus:outline-white scrollbar-none text-white placeholder:text-gray-400 resize-none"
                             placeholder="Hãy nói gì đó">
                         <div class="flex content-center text-xl text-white cursor-pointer size-5 hover:opacity-75">
                             <i v-if="txt_comment !== ''" v-on:click="sendComment()" class="fa-solid fa-paper-plane"></i>
@@ -241,6 +241,7 @@ export default {
             live: [],
             txt_comment: "",
             comments: [],
+            userJustJoin: '',
         }
     },
     created() {
@@ -282,10 +283,16 @@ export default {
         ServerSendCommentToClient: function (responseComment) {
             // Push to the comment list
             if (responseComment.type === 'comment' &&
-                this.liveId == responseComment.live_id) {
+                this.liveId == responseComment.live_id &&
+                responseComment.action == 'comment') {
                 // Append comment to list, reupdate data
                 this.comments.push(responseComment);
                 this.$forceUpdate();
+            }
+            if (responseComment.type === 'comment' &&
+                this.liveId == responseComment.live_id &&
+                responseComment.action == 'join') {
+                this.userJustJoin = responseComment.name;
             }
         },
     },
@@ -318,12 +325,12 @@ export default {
                 id: 1,
                 comment: "",
                 avatar: "",
-                name: "",
+                name: JSON.parse(sessionStorage.getItem('user_infor')).name,
                 created_at: "2022-07 -09 07:00: 41",
                 updated_at: "2022-07 -09 07:00: 41",
                 live_id: this.liveId,
                 type: "comment",
-                action: "join"
+                action: "join",
             });
         },
 
@@ -401,8 +408,10 @@ export default {
                         'Authorization': 'Bearer ' + this.access_token
                     },
                 });
-                this.comments.push(callAPI.data.data);
+                // this.comments.push(callAPI.data.data);
                 this.txt_comment = '';
+                // Send comment data to socket.io
+                this.$socket.emit('ClientSendCommentToServer', callAPI.data.data);
             } catch (err) {
                 console.log(err);
             }
