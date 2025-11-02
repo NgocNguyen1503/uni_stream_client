@@ -202,7 +202,8 @@
                             class="px-3 py-3 w-full pl-4 bg-[#444444] rounded-xl transition-all outline outline-2 outline-transparent focus:outline-white scrollbar-none text-white placeholder:text-gray-400 resize-none"
                             placeholder="Hãy nói gì đó">
                         <div class="flex content-center text-xl text-white cursor-pointer size-5 hover:opacity-75">
-                            <i v-if="txt_comment !== ''" v-on:click="sendComment()" class="fa-solid fa-paper-plane"></i>
+                            <i v-if="txt_comment !== ''" v-on:click="detectComment()"
+                                class="fa-solid fa-paper-plane"></i>
                             <i v-else class="fa-solid fa-paper-plane"></i>
                         </div>
                     </div>
@@ -390,6 +391,28 @@ export default {
                     this.live.live.follows = 1;
                 } else {
                     this.live.live.follows = 0;
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
+        async detectComment() {
+            try {
+                const formData = new FormData();
+                formData.append("comment", this.txt_comment);
+                const callAPI = await axios.post('http://127.0.0.1:5000/detect', formData, {
+                    /************ Attach param for request here ***************/
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Authorization': 'Bearer ' + this.access_token
+                    },
+                });
+                if (callAPI.data.is_bad) {
+                    alert("Bình luận chứa ngôn từ vi phạm!");
+                    return false;
+                } else {
+                    this.sendComment();
                 }
             } catch (err) {
                 console.log(err);
