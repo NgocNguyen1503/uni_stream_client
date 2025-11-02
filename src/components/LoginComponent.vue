@@ -41,6 +41,7 @@
 // import Vue from 'vue'
 import axios from 'axios'
 import { googleTokenLogin } from "vue3-google-login";
+import { requestPermission } from "../firebase.js"; // Import firebase settings
 // import component1 from 'component1'
 // import component2 from 'component2'
 
@@ -146,7 +147,27 @@ export default {
                 if (response.data.code == 200) {
                     sessionStorage.setItem('access_token', response.data.data.accessToken);
                     sessionStorage.setItem('user_infor', JSON.stringify(response.data.data.user_infor));
+                    // Request notification permission when the app starts.
+                    requestPermission().then(token => {
+                        console.log("FCM Token: ", token);
+                        // Using axios call to server add token to DB
+                        axios.get('http://localhost:8000/api/set-device-token', {
+                            // Pass param to header
+                            headers: {
+                                "Content-type": "application/json",
+                                "Authorization": "Bearer " + response.data.data.accessToken
+                            },
+                            params: {
+                                fcmToken: token,
+                            }
+                        }).then(function () {
+                            window.location.href = "/index";
+                        });
+                    }).catch(err => {
+                        console.error("Get token ereors: : ", err);
+                    });
                     window.location.replace('/home');
+                    return true;
                 }
             }).catch(function (errors) {
                 console.log(errors);
