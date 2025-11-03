@@ -96,7 +96,7 @@
                                             <label for="modal-report"
                                                 class="text-xl font-medium text-white cursor-pointer">Mô tả vi
                                                 phạm</label>
-                                            <input
+                                            <input v-model="report_content"
                                                 class="px-5 py-4 bg-[#222222] rounded-xl transition-all duration-200 outline outline-2 outline-transparent focus:outline-white text-base"
                                                 type="text" id="modal-report"
                                                 placeholder="Hành vi bạo lực, ngôn từ xúc phạm,...">
@@ -105,7 +105,7 @@
                                     <div class="flex justify-end w-full gap-4">
                                         <label for="modal-report"
                                             class="px-5 py-2 text-lg font-semibold text-center text-white transition-all duration-200 bg-red-500 cursor-pointer rounded-xl hover:opacity-75 min-w-24">Hủy</label>
-                                        <label for="modal-report"
+                                        <label v-on:click="sendReport()" for="modal-report"
                                             class="text-white bg-[#222222] py-2 px-5 font-semibold rounded-xl hover:opacity-75 min-w-24 text-center cursor-pointer transition-all duration-200 text-lg">Xác
                                             nhận</label>
                                     </div>
@@ -243,6 +243,7 @@ export default {
             txt_comment: "",
             comments: [],
             userJustJoin: '',
+            report_content: '',
         }
     },
     created() {
@@ -435,6 +436,28 @@ export default {
                 this.txt_comment = '';
                 // Send comment data to socket.io
                 this.$socket.emit('ClientSendCommentToServer', callAPI.data.data);
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
+        async sendReport() {
+            try {
+                const formData = new FormData();
+                formData.append("live_id", this.liveId);
+                formData.append("report_content", this.report_content);
+                const callAPI = await axios.post('http://localhost:8000/api/report', formData, {
+                    /************ Attach param for request here ***************/
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                        'Authorization': 'Bearer ' + this.access_token
+                    },
+                });
+                // this.comments.push(callAPI.data.data);
+                this.report_content = '';
+                if (callAPI.data.code == 200) {
+                    alert("Gửi báo cáo vi phạm thành công!");
+                }
             } catch (err) {
                 console.log(err);
             }
